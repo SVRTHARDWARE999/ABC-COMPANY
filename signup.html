@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Create New Account</title>
+    <link rel="stylesheet" href="styles/body.css">
+    <script src="javascripts/meta-theme.js"></script>
+</head>
+<body>
+    <!-- <div class="login-container">
+        <h2>Register account</h2>
+        <form id="registrationForm" name="signup">
+            <div class="input-group">
+                <label for="user-mobile">Mobile Number</label>
+                <input type="tel" id="mobile" name="user-mobile" maxlength="10" placeholder="Enter your mobile number" required>
+            </div>
+            <div class="input-group">
+                <label for="email">G mail</label>
+                <input type="email" id="email" name="email" placeholder="Enter your gmail here" required>
+            </div>
+            <div class="input-group">
+                <label for="business">Business Name</label>
+                <input type="text" id="business" name="business" placeholder="Enter your business name" required>
+            </div>
+            <div class="input-group">
+                <label for="gstin">GSTIN Number</label>
+                <input type="text" id="gstin" name="gstin" maxlength="15" placeholder="Enter your GSTIN number">
+            </div>
+            <div class="input-group">
+                <label for="address">Full Address</label>
+                <textarea name="address" id="address" rows="10" placeholder="enter your full address here including #door number / street / city / pincode /  state" required></textarea>
+            </div>
+            <div class="input-group">
+                <label for="password">Create Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your new password" required>
+            </div>
+            <button type="submit" value="submit" id="submit">Register</button>
+            <p>Already a user? <a href="login.html">Login now!</a></p>
+        </form>
+    </div>
+    <div id="errorMessage"></div> -->
+
+    <div class="container">
+        <form method="post" action="" name="contact-form">
+           <h4>Contact Us</h4>
+           <input type="text" name="your-name" placeholder="Name">
+           <input type="text" name="your-number" placeholder="Number">
+           <input type="email" name="your-email" placeholder="Email">
+           <input type="submit" value="Submit" id="submit">
+        </form>
+    </div>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbynTBvf9CZNUeRCFECDCv3hGPy-09LSJ62i0S4oW-kAXhAkM43gzwaUMENYbqZWxPTXzw/exec'
+
+        const form = document.forms['signup']
+
+        form.addEventListener('submit', e => {
+            
+            e.preventDefault()
+            
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => alert("Thank you! Form is submitted" ))
+            .then(() => { window.location.reload(); })
+            .catch(error => console.error('Error!', error.message))
+        })
+    </script>
+
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('registrationForm');
+            const errorMessage = document.getElementById('errorMessage');
+            const submitButton = form.querySelector('button[type="submit"]');
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbynTBvf9CZNUeRCFECDCv3hGPy-09LSJ62i0S4oW-kAXhAkM43gzwaUMENYbqZWxPTXzw/exec';
+    
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                submitButton.disabled = true;
+                submitButton.textContent = 'Submitting...';
+                
+                try {
+                    // Create form data and log it
+                    const formData = new FormData(form);
+                    console.log('Form data:', Object.fromEntries(formData));
+    
+                    const response = await fetch(scriptURL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: new URLSearchParams(formData).toString()
+                    });
+    
+                    if (response.type === 'opaque') {
+                        // Success case with no-cors
+                        alert("Form submitted successfully!");
+                        window.location.href = 'login.html';
+                    }
+    
+                } catch (error) {
+                    console.error('Error:', error);
+                    errorMessage.textContent = 'Submission failed! Please try again.';
+                    alert("Error submitting form!");
+                } finally {
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Register';
+                }
+            });
+        });
+    </script> -->
+
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, Helvetica, sans-serif;
+            height: 100svh;
+            background-image: url('sources/background.jpg') !important;
+            background-size: cover;
+            background-position: center;
+            background-repeat: ;
+            text-transform: capitalize;
+        }
+
+        input {
+            text-transform: capitalize;
+        }
+
+        #gstin {
+            text-transform: uppercase;
+        }
+        #address{
+            width: 100%;
+            height: auto;
+            outline: none;
+            border: none;
+            text-transform: capitalize;
+            border-radius: 1vw;
+            padding: 1%;
+            box-sizing: border-box;
+        }
+
+        .login-container p {
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            text-transform: capitalize;
+            font-size: 12px;
+        }
+
+        .login-container p a {
+            -webkit-tap-highlight-color: transparent;
+            text-decoration: none;
+            color: var(--active-button-color);
+        }
+
+        .login-container p a:hover {
+            color: rgb(0, 132, 185);
+        }
+
+        .login-container {
+            background-color: #ffffff47;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 85%;
+            max-width: 400px;
+            overflow-x: hidden;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            text-transform: capitalize;
+            background-color: var(--app-bar-color);
+            border: 1px solid var(--active-button-color);
+            border-radius: 5vw;
+            color: var(--active-button-color);
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            -webkit-tap-highlight-color: transparent;
+            background-color: var(--active-button-color);
+            color: white;
+        }
+    </style>
+</body>
+</html>

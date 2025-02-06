@@ -1,0 +1,50 @@
+/* ********** App Theme Color's ********************** */
+    :root{
+        --appbar-color: #f1cbff;
+        --active-button-color:#a300de;
+        --app-background:rgb(241, 241, 241);
+    }
+/* page body style */
+body{
+    width: 100%;
+    height: auto;
+    margin: 0;
+    background-color: var(--app-background);
+    overflow-x: hidden;
+    scrollbar-width: none;
+    user-select: none;
+}
+html{
+    scrollbar-width: none;
+}
+.qr-code {
+    display: none;
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    justify-items: center;
+    background-image: url("");
+    text-align: center;
+    margin-top: 20px;
+}
+.qr-code img {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    align-self: center;
+    justify-self: center;
+    mix-blend-mode: multiply;
+}
+/* Media query for portrait mode */
+@media screen and (orientation: portrait) {
+    main {
+        visibility: visible;
+    }
+}
+
+/* Media query for landscape mode */
+@media screen and (orientation: landscape) {
+    main {
+        visibility: hidden;
+    }
+}

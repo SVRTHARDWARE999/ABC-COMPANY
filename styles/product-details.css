@@ -1,0 +1,233 @@
+/* Share Button */
+
+#shareButton{
+    width: 75vw;
+    height: 5vh;
+    background-color: var(--appbar-color);
+    outline: none;
+    border: none;
+    margin: 3%;
+    position: relative;
+    align-self: center;
+    justify-self: center;
+    border-radius: 2vw;
+
+}
+#shareButton:active{
+    background-color: var(--active-button-color);
+    color: white;
+    
+}
+
+
+/* Product Description */
+.product-description{
+    width: 100%;
+    height: auto;
+    background-color: rgb(255, 255, 255);
+    padding: 1.5%;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1.3em;
+    text-transform: capitalize;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Product Price */
+.product-price{
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    justify-content:space-between;
+    background-color: rgb(255, 255, 255);
+    font-family: Arial, Helvetica, sans-serif;
+}
+.product-price div:first-child{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    padding: 1.5%;
+}
+.product-price .sale-price{
+    display: flex;
+    white-space: nowrap;
+    align-items: center;
+    font-size: 22px;
+    font-weight: 550;
+    color: rgb(53, 53, 53);
+}
+
+.product-price .sale-price span{
+    font-size: 7px;
+    font-weight: 400;
+    color: #787878;
+}
+.product-price .mrp{
+    font-size: 13px;
+    color: gray;
+    letter-spacing: 0.2vw;
+    font-weight: bold;
+}
+.product-price .mrp span{
+    
+    text-decoration-line: line-through;
+}
+.product-price div:first-child a{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: gray;
+    font-weight: bold;
+}
+.product-price div:first-child a span{
+    color: rgb(0, 124, 124);
+}
+.product-price .discount{
+    padding: 1.5%;
+    font-size: 18px;
+    color: rgb(163, 0, 0);
+    font-weight: bolder;
+    letter-spacing: 0.3vw;
+}
+
+ /* ---------------------------- product details table --------------------------------- */
+
+ h3{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0 0 2% 1%;
+ }
+
+ h2{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 6% 0 2% 1.2%;
+ }
+
+ table{
+    width: 100%;
+    height: auto;
+    position: relative;
+    align-self: center;
+    margin: 1% 0 0 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    line-height: 1.5em;
+    word-spacing: 0.7vw;
+    text-transform: capitalize;
+    color: #000;
+    background: #ffffff;
+}
+table td{
+    padding:1%;
+    border-collapse: separate;
+}
+table tr{
+    padding: 2% 0 2% 0;
+    border-top: 0.1px solid rgba(128, 128, 128, 0.527);
+    border-collapse: collapse;
+}
+table td:nth-last-child(even){
+    background: #f5f5f5;
+}
+table td:nth-last-child(odd){
+    padding-left: 2.5%;
+}
+
+/* Loading Image Style */
+.loading-image{
+    width: 100%;
+    height: 90vh;
+    -o-object-position: center;
+    -o-object-fit: scale-down;
+    object-fit: scale-down;
+    object-position: center;
+}
+
+/*************************** Related Products *********************************/
+
+.dynamic-products{
+    width: 100%;
+    height: auto;
+    display: flex;
+    background-color: #000000;
+    flex-wrap: wrap; /* Allow wrapping to the next line */
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+    justify-items: center;
+    align-self: center;
+}
+.product:last-child:nth-child(odd){
+    visibility: hidden;
+    display: none;
+}
+.product{
+    width: 49.9%;
+    height: auto;
+    aspect-ratio: 2/3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0 0 0.3% 0;
+    position: relative;
+    color: black;
+    font-size: 15px;
+    background-color: rgb(255, 255, 255);
+    border: none;
+}
+.product img{
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 2% 0 2% 0;
+    aspect-ratio: 1/1;
+    -o-object-fit: contain;
+    object-fit: contain;
+    object-position: center;
+    image-rendering: crisp-edges;
+}
+.product .product-description {
+    font-family: Arial, Helvetica, sans-serif;
+    display: -webkit-box;
+    font-size: 12px;
+    text-align: start;
+    margin: 0;
+    -webkit-box-orient: vertical; /* Set the box orientation to vertical */
+    -webkit-line-clamp: 3; /* Limit the text to 3 lines */
+    overflow: hidden; /* Hide the overflow text */
+    text-overflow: ellipsis; /* Add ellipsis (...) at the end of the truncated text */
+    line-clamp: 3; /* Standard property for line clamping */
+    text-transform: capitalize;
+}
+.product .product-price {
+    width: 100%;
+    height: auto;
+    margin: 1.5% 0 2% 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+}
+.product .product-price a:first-child{
+    display: flex;
+    gap: 0;
+    margin: 0;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.product .product-price span:first-child{
+    font-size: 17px;
+    font-weight: bold;
+    color: #039262;
+}
+.product .product-price span:last-child{
+    font-size: 8px;
+    color: #666666;
+    text-decoration: line-through;
+}
+.product .product-price a:last-child{
+    color: maroon;
+}

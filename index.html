@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="styles/body.css">
+    <link rel="stylesheet" href="styles/app.css">
+    <link rel="stylesheet" href="styles/app-bar.css">
+    <link rel="stylesheet" href="swiperJS/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="swiperJS/swiper-bundle.min.js"></script>
+    <script src="javascripts/disable-longpress.js"></script>
+    <script src="javascripts/meta-theme.js"></script>
+     <!-- Dynamic Products API from Google Sheets -->
+     <script src="javascripts/products-api.js"></script>
+    <title>ABC COMPANY</title>
+</head>
+<body>
+    <div class="qr-code" id="qr-code">
+        <p>Scan the QR code to view this page on your mobile device:</p>
+        <img id="qr-code-img" src="" alt="QR Code">
+    </div>
+    <main>
+        <header>
+        </header>
+        <script src="javascripts/app-bar.js"></script>
+        
+        <!-------------------------------- Swiper  Banners ----------------------------->
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><div class="swiper-container"></div></div>
+                <div class="swiper-slide"><div class="swiper-container"></div></div>
+                <div class="swiper-slide"><div class="swiper-container"></div></div>
+                <div class="swiper-slide"><div class="swiper-container"></div></div>
+            </div>
+            <div class="swiper-pagination"></div>
+            </div>
+        </div>
+
+        <!------------------------------ Dynamic Products Flex Starts Here  --------->
+        <div class="dynamic-products">
+            <!-- <button class="product" onclick="window.location.href='product-details.html'">
+                <img src="https://m.media-amazon.com/images/I/71N4hshhfNL._SX569_.jpg" alt="" srcset="">
+                <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi vel assumenda error esse. Corporis, in doloribus? Molestias accusamus, laborum in maxime voluptas vel odio culpa earum modi error aspernatur sunt.</p>
+                <p class="product-price"><a><span>₹899</span><span>MRP ₹1999</span></a><a>-75% off</a></p>
+            </button>
+            <button class="product">
+                <img src="https://p4-ofp.static.pub/fes/cms/2022/06/14/83vtp4lxe22qv27s7k7yeo5aq01tym266987.jpg" alt="" srcset="">
+                <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi vel assumenda error esse. Corporis, in doloribus? Molestias accusamus, laborum in maxime voluptas vel odio culpa earum modi error aspernatur sunt.</p>
+                <p class="product-price"><a><span>₹599</span><span>MRP ₹1499</span></a><a>-75% off</a></p>
+            </button>
+            <button class="product">
+                <img src="https://www.dellstore.com/pub/media/catalog/product/cache/74ae05ef3745aec30d7f5a287debd7f5/i/n/indhs-5420-aio-gy_1_1.jpg" alt="" srcset="">
+                <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi vel assumenda error esse. Corporis, in doloribus? Molestias accusamus, laborum in maxime voluptas vel odio culpa earum modi error aspernatur sunt.</p>
+                <p class="product-price"><a><span>₹599</span><span>MRP ₹1499</span></a><a>-75% off</a></p>
+            </button>
+            <button class="product">
+                <img src="https://i.gadgets360cdn.com/products/large/macbook-air-m1-2020-db-800x600-1607604365.png" alt="" srcset="">
+                <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi vel assumenda error esse. Corporis, in doloribus? Molestias accusamus, laborum in maxime voluptas vel odio culpa earum modi error aspernatur sunt.</p>
+                <p class="product-price"><a><span>₹599</span><span>MRP ₹1499</span></a><a>-75% off</a></p>
+            </button>
+            <button class="product">
+                <img src="https://www.oppo.com/content/dam/oppo/product-asset-library/specs/enco-buds2/buds2-bwgb-2000x976.png" alt="" srcset="">
+                <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi vel assumenda error esse. Corporis, in doloribus? Molestias accusamus, laborum in maxime voluptas vel odio culpa earum modi error aspernatur sunt.</p>
+                <p class="product-price"><a><span>₹599</span><span>MRP ₹1499</span></a><a>-75% off</a></p>
+            </button>
+            <button class="product">
+                <img src="https://www.93mobiles.com/wp-content/uploads/2024/07/51-9QbUWGL._SL1500_.jpg" alt="" srcset="">
+                <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi vel assumenda error esse. Corporis, in doloribus? Molestias accusamus, laborum in maxime voluptas vel odio culpa earum modi error aspernatur sunt.</p>
+                <p class="product-price"><a><span>₹599</span><span>MRP ₹1499</span></a><a>-75% off</a></p>
+            </button>
+            <button class="product">
+                <img src="https://m.media-amazon.com/images/I/61NlZvJ+EfL._AC_UF1000,1000_QL80_.jpg" alt="" srcset="">
+                <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi vel assumenda error esse. Corporis, in doloribus? Molestias accusamus, laborum in maxime voluptas vel odio culpa earum modi error aspernatur sunt.</p>
+                <p class="product-price"><a><span>₹599</span><span>MRP ₹1499</span></a><a>-75% off</a></p>
+            </button>
+            <button class="product">
+                <img src="https://www.fireboltt.com/cdn/shop/products/black-1_1.png?v=1671082759" alt="" srcset="">
+                <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi vel assumenda error esse. Corporis, in doloribus? Molestias accusamus, laborum in maxime voluptas vel odio culpa earum modi error aspernatur sunt.</p>
+                <p class="product-price"><a><span>₹599</span><span>MRP ₹1499</span></a><a>-75% off</a></p>
+            </button>
+            <button class="product">
+                <img src="https://m.media-amazon.com/images/I/711SMo2bL4L._AC_UF1000,1000_QL80_.jpg" alt="" srcset="">
+                <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi vel assumenda error esse. Corporis, in doloribus? Molestias accusamus, laborum in maxime voluptas vel odio culpa earum modi error aspernatur sunt.</p>
+                <p class="product-price"><a><span>₹599</span><span>MRP ₹1499</span></a><a>-75% off</a></p>
+            </button>
+            <button class="product">
+                <img src="https://files.refurbed.io/ii/xiaomi-14-1713250553688402866.jpg?t=fitdesign&h=600&w=800" alt="" srcset="">
+                <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi vel assumenda error esse. Corporis, in doloribus? Molestias accusamus, laborum in maxime voluptas vel odio culpa earum modi error aspernatur sunt.</p>
+                <p class="product-price"><a><span>₹599</span><span>MRP ₹1499</span></a><a>-75% off</a></p>
+            </button>
+            <button class="product">
+                <img src="https://i02.appmifile.com/293_operatorx_operatorx_opx/27/09/2024/d714b3e4e95bd2d4817f5d3458b92c45.png" alt="" srcset="">
+                <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi vel assumenda error esse. Corporis, in doloribus? Molestias accusamus, laborum in maxime voluptas vel odio culpa earum modi error aspernatur sunt.</p>
+                <p class="product-price"><a><span>₹599</span><span>MRP ₹1499</span></a><a>-75% off</a></p>
+            </button>
+            <button class="product">
+                <img src="https://www.mi4canada.com/wp-content/uploads/2023/10/vivo-v29-Majestic-Red.jpg" alt="" srcset="">
+                <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi vel assumenda error esse. Corporis, in doloribus? Molestias accusamus, laborum in maxime voluptas vel odio culpa earum modi error aspernatur sunt.</p>
+                <p class="product-price"><a><span>₹599</span><span>MRP ₹1499</span></a><a>-75% off</a></p>
+            </button>
+            <button class="product">
+                <img src="https://in-exstatic-vivofs.vivo.com/gdHFRinHEMrj3yPG/1692691698575/c0f180bba865685a87025f8ff514ab13.png" alt="" srcset="">
+                <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi vel assumenda error esse. Corporis, in doloribus? Molestias accusamus, laborum in maxime voluptas vel odio culpa earum modi error aspernatur sunt.</p>
+                <p class="product-price"><a><span>₹599</span><span>MRP ₹1499</span></a><a>-75% off</a></p>
+            </button>
+            <button class="product">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAxBHY6FhABfQR9DYAnpQvBHHiplXsc7Ym4Q&s" alt="" srcset="">
+                <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi vel assumenda error esse. Corporis, in doloribus? Molestias accusamus, laborum in maxime voluptas vel odio culpa earum modi error aspernatur sunt.</p>
+                <p class="product-price"><a><span>₹599</span><span>MRP ₹1499</span></a><a>-75% off</a></p>
+            </button>
+            <button class="product">
+                <img src="https://www.reliancedigital.in/medias/OppoK12x5G-494492959-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3w2OTY0NnxpbWFnZS9qcGVnfGltYWdlcy9oYzIvaGZkLzEwMjAxMjkxMzkxMDA2LmpwZ3wwMDkxYmIwMjU4ZTllYzliZTY1YmU5ZDhjMzU2MjhlMWQyMTc0OThjNzg2ODBlMDg5MjEzNTFjZGRlNjVlYjZi" alt="" srcset="">
+                <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi vel assumenda error esse. Corporis, in doloribus? Molestias accusamus, laborum in maxime voluptas vel odio culpa earum modi error aspernatur sunt.</p>
+                <p class="product-price"><a><span>₹599</span><span>MRP ₹1499</span></a><a>-75% off</a></p>
+            </button>
+            <button class="product">
+                <img src="https://opsg-img-cdn-gl.heytapimg.com/epb/202411/03/eAKM40kmDtMYxKWL.png?x-amz-process=image/format,webp/quality,Q_80" alt="" srcset="">
+                <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi vel assumenda error esse. Corporis, in doloribus? Molestias accusamus, laborum in maxime voluptas vel odio culpa earum modi error aspernatur sunt.</p>
+                <p class="product-price"><a><span>₹599</span><span>MRP ₹1499</span></a><a>-75% off</a></p>
+            </button> -->
+            
+        </div>
+
+        <div class="spacer"></div>
+        <footer>
+        </footer>
+        <script src="javascripts/bottom-bar.js"></script>
+    </main>
+
+
+    <!-- <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const container = document.querySelector('.dynamic-products');
+            const buttons = Array.from(container.children);
+            for (let i = buttons.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                container.appendChild(buttons[j]);
+                buttons.splice(j, 1);
+            }
+        });
+    </script> -->
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() 
+    {
+        function isMobile() {
+            return /Mobi|Android/i.test(navigator.userAgent);
+        }
+
+        const main = document.querySelector('main');
+        const qrCodeDiv = document.querySelector('.qr-code');
+        const qrCodeImg = document.getElementById('qr-code-img');
+        const pageUrl = window.location.href;
+
+        if (isMobile()) {
+            main.style.display = 'block';
+            qrCodeDiv.style.display = 'none';
+        } else {
+            main.style.display = 'none';
+            qrCodeDiv.style.display = 'block';
+            qrCodeImg.src = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(pageUrl)}&size=200x200`;
+        }
+    });
+    </script>
+
+    
+    <style>
+        .loading-image {
+        width: 100%;
+        height: 55vh;
+        object-fit: scale-down;
+        object-position: center;
+        margin: 0 auto;
+        }
+    </style>
+    
+    <style>
+        .swiper {
+          width: 100%;
+          height: auto;
+          margin: 1.5% 0 3% 0;
+        }
+        .swiper-wrapper {
+          width: 100%;
+          height: auto;
+        }
+        .swiper-slide {
+          width: 100%;
+          height: auto;
+        }
+        .swiper-container {
+          width: 100%;
+          aspect-ratio: 16/9;
+          background-color: #febbff5c;
+          backdrop-filter: blur(10px);
+        }
+        
+        /* Customize the pagination bullets */
+        .swiper-pagination-bullet {
+            width: 5vw; /* Adjust the size */
+            height: 0.5vh; /* Adjust the size */
+            background-color: var(--appbar-color); /* Default color */
+            opacity: 1; /* Ensure full opacity */
+            border-radius: 1vw; /* Make bullets round */
+            margin: 0.5vw; /* Adjust spacing between bullets */
+        }
+
+        /* Customize the active pagination bullet */
+        .swiper-pagination-bullet-active {
+            background-color: var(--active-button-color); /* Active color */
+            width: 5vw; /* Adjust the size */
+            height: 0.5vh; /* Adjust the size */
+        }
+    </style>
+    <!-- Initialize Swiper -->
+    <script>
+        const progressCircle = document.querySelector(".autoplay-progress svg");
+        const progressContent = document.querySelector(".autoplay-progress span");
+        var swiper = new Swiper(".mySwiper", {
+          spaceBetween: 8,
+          loop:true,
+          centeredSlides: true,
+          autoplay: {
+            delay: 2800,
+            disableOnInteraction: false,
+          },
+          pagination: {
+            el: ".swiper-pagination",
+            clickable: false,
+          },
+          navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          }
+        });
+    </script>
+     
+</body>
+</html>

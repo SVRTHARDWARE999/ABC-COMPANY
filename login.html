@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Login</title>
+    <link rel="stylesheet" href="styles/body.css">
+    <script src="javascripts/meta-theme.js"></script>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form>
+            <div class="input-group">
+                <label for="mobile">Registered Mobile Number</label>
+                <input type="tel" id="mobile" name="mobile" maxlength="10" placeholder="Enter your mobile number" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit">Login</button>
+            <p>new user <a href="signup.html">register now !</a></p>
+        </form>
+    </div>
+
+    <style>
+
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, Helvetica, sans-serif;
+            height: 100vh;
+            /* background-color: var(--appbar-color); */
+            background-image: url('sources/background.jpg') !important;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            }
+        .login-container p{
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            text-transform: capitalize;
+            font-size: 4vw;
+
+        }
+        .login-container p a{
+            -webkit-tap-highlight-color: transparent;
+            text-decoration: none;
+            color: var(--active-button-color);
+        }
+        .login-container p a:hover{
+            color: rgb(0, 132, 185);
+        }
+
+        .login-container {
+            background-color: #ffffff47;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 85%;
+            max-width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            text-transform: capitalize;
+            background-color:var(--app-bar-color);
+            border: 1px solid var(--active-button-color);
+            border-radius: 5vw;
+            color: var(--active-button-color);
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            -webkit-tap-highlight-color: transparent;
+            background-color: var(--active-button-color);
+            color: white;
+        }
+    </style>
+
+</body>
+</html>
