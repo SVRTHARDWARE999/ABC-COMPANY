@@ -4,30 +4,45 @@ document.addEventListener("DOMContentLoaded", function() {
     loadingImage.src = 'sources/loading-fun-1.gif'; // Replace with the actual URL of the loading image
     loadingImage.classList.add('loading-image');
 
-    const API = "https://script.google.com/macros/s/AKfycbzmIiQqrBtWqlNiRDoqu6UqCivps8gbzngeOeMkO_tYqpgi4CMPL_ZrfQXSSu1_XacxlQ/exec";
+    const API = "https://script.google.com/macros/s/AKfycbyTJGEVy0sF3MHEBXDPdVspAL5aVZXXeTdqoj_RlepipnBZg8ow7lGeanRQeCsRL16DuA/exec";
+    let start = 0;
+    const limit = 16;
+    let isLoading = false;
+    let allDataLoaded = false;
 
-    async function products() {
+    async function fetchProducts() {
+        if (isLoading || allDataLoaded) return; // Prevent multiple simultaneous fetches or fetching after all data is loaded
+        isLoading = true;
+
         try {
             productsContainer.style.backgroundColor = 'transparent'; // Set background color to transparent
             productsContainer.appendChild(loadingImage); // Show loading image
 
-            const response = await fetch(API);
+            const response = await fetch(`${API}?start=${start}`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const data = await response.json();
             console.log(data); // Check the full data structure
-            localStorage.setItem('cachedProducts', JSON.stringify(data.data)); // Cache the data
+
+            if (data.data.length === 0) {
+                allDataLoaded = true; // No more data to load
+                productsContainer.removeChild(loadingImage); // Remove loading image
+                return;
+            }
+
             displayProducts(data.data); // Assuming data contains a property 'data' that holds the array
+            start += limit; // Increment start by limit
         } catch (err) {
             console.error("Failed to fetch API data:", err);
         } finally {
-            productsContainer.removeChild(loadingImage); // Remove loading image
+            if (!allDataLoaded) {
+                productsContainer.removeChild(loadingImage); // Remove loading image if there is more data to load
+            }
             productsContainer.style.backgroundColor = ''; // Revert background color to normal
+            isLoading = false;
         }
     }
-
-    products();
 
     // Displaying API Products Data in HTML template Page
     function displayProducts(data) {
@@ -58,4 +73,13 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         return array;
     }
+
+    function handleScroll() {
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+            fetchProducts(); // Fetch next set of products when user scrolls to the bottom
+        }
+    }
+
+    window.addEventListener('scroll', handleScroll);
+    fetchProducts(); // Load initial products
 });

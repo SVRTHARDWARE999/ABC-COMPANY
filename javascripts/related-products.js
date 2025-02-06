@@ -1,11 +1,18 @@
 document.addEventListener("DOMContentLoaded", function() {
     const relatedProductsContainer = document.getElementById('related-products');
+    let start = 0;
+    const limit = 16;
+    let isLoading = false;
+    let allDataLoaded = false;
 
-    async function products() {
+    async function fetchProducts() {
         if (!relatedProductsContainer) {
             console.error("Related products container not found!");
             return;
         }
+
+        if (isLoading || allDataLoaded) return; // Prevent multiple simultaneous fetches or fetching after all data is loaded
+        isLoading = true;
 
         const category = new URLSearchParams(window.location.search).get('category');
         const currentProductCode = new URLSearchParams(window.location.search).get('code');
@@ -17,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         try {
-            const response = await fetch(`https://script.google.com/macros/s/AKfycbwG2CqkPgJDXqiqmvPZibsl4WnnOnDErXvagPpp9qkLqcCyEbP3Efy5qkujeFOwVZBZTQ/exec?category=${category}`);
+            const response = await fetch(`https://script.google.com/macros/s/AKfycbyTJGEVy0sF3MHEBXDPdVspAL5aVZXXeTdqoj_RlepipnBZg8ow7lGeanRQeCsRL16DuA/exec?category=${category}&start=${start}`);
             
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -25,13 +32,17 @@ document.addEventListener("DOMContentLoaded", function() {
             
             const data = await response.json();
             if (!data || !data.data || !data.data.length) {
-                throw new Error('No products found in this category');
+                allDataLoaded = true; // No more data to load
+                return;
             }
-            
+
             displayProducts(data, currentProductCode);
+            start += limit; // Increment start by limit
         } catch (err) {
             console.error("Failed to fetch API data:", err);
             relatedProductsContainer.innerHTML = `<div class="error">Error loading products: ${err.message}</div>`;
+        } finally {
+            isLoading = false;
         }
     }
 
@@ -74,13 +85,24 @@ document.addEventListener("DOMContentLoaded", function() {
             </button>
         `).join('');
     
-        relatedProductsContainer.innerHTML = `
-            <h2>Related Products</h2>
-            <div class="dynamic-products">
-                ${productsHTML}
-            </div>
-        `;
+        if (!relatedProductsContainer.querySelector('.dynamic-products')) {
+            relatedProductsContainer.innerHTML = `
+                <h2>Related Products</h2>
+                <div class="dynamic-products">
+                    ${productsHTML}
+                </div>
+            `;
+        } else {
+            relatedProductsContainer.querySelector('.dynamic-products').insertAdjacentHTML('beforeend', productsHTML);
+        }
     }
 
-    products();
+    function handleScroll() {
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+            fetchProducts(); // Fetch next set of products when user scrolls to the bottom
+        }
+    }
+
+    window.addEventListener('scroll', handleScroll);
+    fetchProducts(); // Load initial products
 });

@@ -150,6 +150,7 @@ table td:nth-last-child(odd){
 .dynamic-products{
     width: 100%;
     height: auto;
+    margin: 0 0 4% 0;
     display: flex;
     background-color: #000000;
     flex-wrap: wrap; /* Allow wrapping to the next line */
