@@ -74,12 +74,34 @@ document.addEventListener("DOMContentLoaded", function() {
         return array;
     }
 
-    function handleScroll() {
-        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-            fetchProducts(); // Fetch next set of products when user scrolls to the bottom
+    // Add throttle function
+    function throttle(func, limit) {
+        let inThrottle;
+        return function() {
+            const args = arguments;
+            const context = this;
+            if (!inThrottle) {
+                func.apply(context, args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
+            }
         }
     }
 
-    window.addEventListener('scroll', handleScroll);
+    // Update scroll handler
+    function handleScroll() {
+        const scrollPosition = window.innerHeight + window.pageYOffset;
+        const threshold = document.documentElement.scrollHeight - 200;
+        
+        if (scrollPosition >= threshold && !isLoading && !allDataLoaded) {
+            fetchProducts();
+        }
+    }
+
+    // Remove old scroll listener and add new ones
+    window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', throttle(handleScroll, 250), { passive: true });
+    window.addEventListener('touchmove', throttle(handleScroll, 250), { passive: true });
+
     fetchProducts(); // Load initial products
 });
