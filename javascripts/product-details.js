@@ -1,9 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
     const productContainer = document.querySelector(".product-container"); // Ensure this matches the actual class name
-    const loadingImage = document.createElement('img');
-    loadingImage.src = 'sources/loading-fun-2.gif'; // Replace with the actual URL of the loading image
-    loadingImage.classList.add('loading-image');
-    loadingImage.style.display = 'block'; // Ensure the loading image is visible initially
 
     console.log('Product Container:', productContainer); // Log the product container to check if it is selected
 
@@ -16,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         try {
-            productContainer.appendChild(loadingImage); // Show loading image
+            document.body.style.overflow = 'hidden'; // Add overflow hidden to body
             const response = await fetch(`https://script.google.com/macros/s/AKfycbwG2CqkPgJDXqiqmvPZibsl4WnnOnDErXvagPpp9qkLqcCyEbP3Efy5qkujeFOwVZBZTQ/exec?code=${productId}`); // Replace with actual API URL
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -27,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
         } catch (err) {
             console.error("Failed to fetch API data:", err);
         } finally {
-            loadingImage.style.display = 'none'; // Hide loading image
+            document.body.style.overflow = ''; // Remove overflow hidden from body
         }
     }
 

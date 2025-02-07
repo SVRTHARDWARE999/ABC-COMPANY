@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function() {
     const productsContainer = document.querySelector(".dynamic-products");
-    const loadingImage = document.createElement('img');
-    loadingImage.src = 'sources/loading-fun-1.gif'; // Replace with the actual URL of the loading image
-    loadingImage.classList.add('loading-image');
+    const loadingSpan = document.createElement('span');
+    loadingSpan.className = 'api-loader';
+    loadingSpan.innerHTML = '<img src="sources/loading-fun-1.gif" alt="Loading..." />'; // Replace with the actual URL of the loading image
 
     const API = "https://script.google.com/macros/s/AKfycbyTJGEVy0sF3MHEBXDPdVspAL5aVZXXeTdqoj_RlepipnBZg8ow7lGeanRQeCsRL16DuA/exec";
     let start = 0;
@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         try {
             productsContainer.style.backgroundColor = 'transparent'; // Set background color to transparent
-            productsContainer.appendChild(loadingImage); // Show loading image
+            productsContainer.appendChild(loadingSpan); // Show loading span
 
             const response = await fetch(`${API}?start=${start}`);
             if (!response.ok) {
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             if (data.data.length === 0) {
                 allDataLoaded = true; // No more data to load
-                productsContainer.removeChild(loadingImage); // Remove loading image
+                productsContainer.removeChild(loadingSpan); // Remove loading span
                 return;
             }
 
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function() {
             console.error("Failed to fetch API data:", err);
         } finally {
             if (!allDataLoaded) {
-                productsContainer.removeChild(loadingImage); // Remove loading image if there is more data to load
+                productsContainer.removeChild(loadingSpan); // Remove loading span if there is more data to load
             }
             productsContainer.style.backgroundColor = ''; // Revert background color to normal
             isLoading = false;

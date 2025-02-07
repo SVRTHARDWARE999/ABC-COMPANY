@@ -15,6 +15,14 @@ document.addEventListener("DOMContentLoaded", function() {
         if (isLoading || allDataLoaded) return;
         isLoading = true;
 
+        // Add loading indicator
+        const apiLoader = document.createElement('div');
+        apiLoader.className = 'api-loader';
+        apiLoader.innerHTML = '<img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExeTA5aXNrMTJydjRwZzRiZzJnMDJwZW5tY243aWk0a3VtM3pqZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/rLl1g739pZdE4zlovM/giphy.gif" alt="Loading..."/>';
+        relatedProductsContainer.appendChild(apiLoader);
+
+        
+
         const category = new URLSearchParams(window.location.search).get('category');
         const currentProductCode = new URLSearchParams(window.location.search).get('code');
 
@@ -45,6 +53,12 @@ document.addEventListener("DOMContentLoaded", function() {
             relatedProductsContainer.innerHTML = `<div class="error">Error loading products: ${err.message}</div>`;
         } finally {
             isLoading = false;
+            // Remove loading indicator
+            if (apiLoader.parentNode) {
+                apiLoader.parentNode.removeChild(apiLoader);
+            }
+            // Remove overflow hidden from body
+            document.body.style.overflow = '';
         }
     }
 
