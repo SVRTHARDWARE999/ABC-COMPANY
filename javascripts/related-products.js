@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // Add loading indicator
         const apiLoader = document.createElement('div');
         apiLoader.className = 'api-loader';
-        apiLoader.innerHTML = '<img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExeTA5aXNrMTJydjRwZzRiZzJnMDJwZW5tY243aWk0a3VtM3pqZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/rLl1g739pZdE4zlovM/giphy.gif" alt="Loading..."/>';
+        apiLoader.innerHTML = '<img src="/sources/loading-fun-3.gif" alt="Loading..."/>';
         relatedProductsContainer.appendChild(apiLoader);
 
         
