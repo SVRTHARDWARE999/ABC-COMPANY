@@ -18,10 +18,8 @@ document.addEventListener("DOMContentLoaded", function() {
         // Add loading indicator
         const apiLoader = document.createElement('div');
         apiLoader.className = 'api-loader';
-        apiLoader.innerHTML = '<img src="/sources/loading-fun-3.gif" alt="Loading..."/>';
+        apiLoader.innerHTML = '<img src="sources/loading-fun-3.gif" alt="Loading..."/>';
         relatedProductsContainer.appendChild(apiLoader);
-
-        
 
         const category = new URLSearchParams(window.location.search).get('category');
         const currentProductCode = new URLSearchParams(window.location.search).get('code');
