@@ -1,4 +1,4 @@
 $(window).on("load",function()
 {
-    $(".loader-container").fadeOut(4000);
+    $(".loader-container").fadeOut(1500);
 });

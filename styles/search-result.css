@@ -1,0 +1,141 @@
+/* card root of width and height */
+
+:root{
+    --width: 100%;
+    --height: 25vh;
+}
+
+/* search result css */
+.search-result{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.product-card{ 
+  width: var(--width);
+  height: var(--height);
+  overflow: hidden;
+  background-color: #fff;
+  margin: 1.5% 0 0 0;
+  border: none;
+  outline: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.product-card span{
+    width: 49%;
+    height: auto;
+    text-transform: capitalize;
+}
+.product-card span:first-child{
+    height: var(--height);
+    display: flex;
+    align-items: center;
+    align-self: center;
+    justify-content: center;
+    justify-self: center;
+    background: #ffffff;
+}
+.product-card span:first-child img{
+    width: 85%;
+    height: var(--height);
+    image-rendering: auto;
+    -o-object-fit: contain;
+    object-fit: contain;
+    object-position: center;
+}
+.product-card span:last-child{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: left;
+}
+.product-card span:last-child{
+    height: var(--height);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    justify-self: baseline;
+}
+.product-card span:last-child p{
+    margin: 1% 0 0.5% 0;
+}
+.description{
+    font-size: 11px;
+    font-weight: auto;
+    line-height: 1.3em;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    color: #000;
+}
+
+/* pricing css */
+
+.price{
+    display: inline-flex;
+    align-items: center;
+    font-size: 17px;
+    font-weight: bold;
+    color: #039262;
+}
+.price b{
+    font-size: 10px;
+    color: rgb(58, 58, 58);
+}
+.mrp{
+    display: inline-flex;
+    align-items: center;
+    font-size: 17px;
+    font-weight: bold;
+    color: grey;
+}
+.mrp b{
+    font-size: 13px;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    text-decoration: line-through;
+}
+.discount{
+    display: inline-flex;
+    align-items: center;
+    font-size: 17px;
+    font-weight: bold;
+    color: grey;
+}
+.discount b{
+    font-size: 13px;
+    color: rgb(77, 1, 1);
+    font-weight: bold;
+}
+.moq{
+    display: inline-flex;
+    align-items: center;
+    font-size: 17px;
+    font-weight: bold;
+    color: grey;
+}
+.moq b{
+    font-size: 13px;
+    color: rgb(180, 117, 0);
+    font-weight: bold;
+}
+
+/* Search result not found */
+
+.no-search{
+    width: 100%;
+    height: 75vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.no-search img{
+    width:70%;
+    height: auto;
+}
