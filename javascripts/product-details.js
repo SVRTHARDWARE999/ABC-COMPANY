@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         try {
             document.body.style.overflow = 'hidden'; // Add overflow hidden to body
-            const response = await fetch(`https://script.google.com/macros/s/AKfycbwG2CqkPgJDXqiqmvPZibsl4WnnOnDErXvagPpp9qkLqcCyEbP3Efy5qkujeFOwVZBZTQ/exec?code=${productId}`); // Replace with actual API URL
+            const response = await fetch(`https://script.google.com/macros/s/AKfycbwdzKycxdJYIe2SsMdOx7AggXl-fAdSE9e_KweEUN2PPeDxln2QUL4hgiFfwCNEcwEi/exec?code=${productId}`); // Replace with actual API URL
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
