@@ -31,6 +31,22 @@
     object-position: center;
 }
 
+/* API Banner Loader Animation */
+
+.banner-loader{
+    width: 100%;
+    height: auto;
+    background-color: var(--app-background);
+}
+.banner-loader img{
+    width: 100%;
+    height: auto;
+    mix-blend-mode: multiply;
+    -o-object-fit: contain;
+    object-fit: contain;
+    object-position: center;
+}
+
 /* Dynamic Products Styling */
 .dynamic-products{
     width: 100%;
