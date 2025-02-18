@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         try {
-            const response = await fetch(`https://script.google.com/macros/s/AKfycbwyxDraDjDVy2Ue64W-jEz3jV5LqpRAy3_o9CIzUZRuYhu2z_sjRES10LLL2xz_w5wy/exec?category=${category}&start=${start}`);
+            const response = await fetch(`https://script.google.com/macros/s/AKfycbwqh0Hs5sOdeoFz25Kny3Zcpw9F-hJCLEJEjp7tVgj5Dl5hrqTWyzHyUByJrO5ADsXddQ/exec?category=${category}&start=${start}`);
             
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
