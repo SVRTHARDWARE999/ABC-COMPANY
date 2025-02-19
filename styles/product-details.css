@@ -1,11 +1,37 @@
+/* Product Buttons Container */
+
+.product-buttons{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    justify-items: center;
+    align-self: center;
+    margin: 1% 0 5% 0;
+}
+
+/* Share & Save Buttons Container */
+
+.share-save{
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
 /* Share Button */
 
 #shareButton{
-    width: 75vw;
-    height: 5vh;
+    width: 64.5%;
+    height: auto;
+    padding: 3%;
+    font-size: 5vw;
     background-color: var(--appbar-color);
+    border: 1px solid var(--active-button-color);
     outline: none;
-    border: none;
     margin: 3%;
     position: relative;
     align-self: center;
@@ -14,6 +40,48 @@
 
 }
 #shareButton:active{
+    background-color: var(--active-button-color);
+    color: white;
+    
+}
+
+/* Save Button */
+
+#save{
+    width: 24%;
+    height: auto;
+    position: relative;
+    padding: 2.5%;
+    background-color: var(--appbar-color);
+    font-size: 5vw;
+    font-family: system-ui,Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    border: 1px solid var(--active-button-color);
+    border-radius: 2vw;
+    outline: none;
+}
+#save:active{
+    background-color: var(--active-button-color);
+    color: white;
+    
+}
+
+/* Add to Cart Button */
+
+#cart{
+    width: 93%;
+    height: auto;
+    position: relative;
+    padding: 3%;
+    background-color: var(--appbar-color);
+    font-size: 5vw;
+    font-family: system-ui,Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    border: 1px solid var(--active-button-color);
+    border-radius: 2vw;
+    outline: none;
+}
+#cart:active{
     background-color: var(--active-button-color);
     color: white;
     
@@ -59,7 +127,7 @@
     font-weight: bold;
     line-height: 1.3em;
     text-transform: capitalize;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: system-ui, Arial, Helvetica, sans-serif;
 }
 
 /* Product Price */
@@ -71,7 +139,7 @@
     justify-items: center;
     justify-content:space-between;
     background-color: rgb(255, 255, 255);
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: system-ui,Arial, Helvetica, sans-serif;
 }
 .product-price div:first-child{
     display: flex;
@@ -125,12 +193,12 @@
  /* ---------------------------- product details table --------------------------------- */
 
  h3{
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: system-ui,Arial, Helvetica, sans-serif;
     margin: 0 0 2% 1%;
  }
 
  h2{
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: system-ui,Arial, Helvetica, sans-serif;
     margin: 6% 0 2% 1.2%;
  }
 
@@ -140,7 +208,7 @@
     position: relative;
     align-self: center;
     margin: 1% 0 0 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: system-ui,Arial, Helvetica, sans-serif;
     font-weight: 400;
     line-height: 1.5em;
     word-spacing: 0.7vw;
@@ -220,7 +288,7 @@ table td:nth-last-child(odd){
     image-rendering: crisp-edges;
 }
 .product .product-description {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: system-ui,Arial, Helvetica, sans-serif;
     display: -webkit-box;
     font-size: 12px;
     text-align: start;
@@ -239,7 +307,7 @@ table td:nth-last-child(odd){
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: system-ui,Arial, Helvetica, sans-serif;
     font-size: 15px;
 }
 .product .product-price a:first-child{

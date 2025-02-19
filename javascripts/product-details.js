@@ -72,24 +72,39 @@ document.addEventListener("DOMContentLoaded", function() {
             <!-------------------------------- Swiper  Banners ----------------------------->
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide">
+                    <div class="swiper-slide" style="${product['image-1'] || 'display:none;'}">
                         <div class="swiper-zoom-container">
                             <img src="${imageUrl}" alt="Image 1" srcset="" id="thumblain">
                         </div>
                     </div>
-                    <div class="swiper-slide">
+                    <div class="swiper-slide" style="${product['image-2'] || 'display:none;'}">
                         <div class="swiper-zoom-container">
                             <img src="${product['image-2'] || ''}" alt="Image 2" srcset="">
                         </div>
                     </div>
-                    <div class="swiper-slide">
+                    <div class="swiper-slide" style="${product['image-3'] || 'display:none;'}">
                         <div class="swiper-zoom-container">
                             <img src="${product['image-3'] || ''}" alt="Image 3" srcset="">
                         </div>
                     </div>
-                    <div class="swiper-slide">
+                    <div class="swiper-slide" style="${product['image-4'] || 'display:none;'}">
                         <div class="swiper-zoom-container">
                             <img src="${product['image-4'] || ''}" alt="Image 4" srcset="">
+                        </div>
+                    </div>
+                    <div class="swiper-slide" style="${product['image-5'] || 'display:none;'}">
+                        <div class="swiper-zoom-container">
+                            <img src="${product['image-5'] || ''}" alt="Image 5" srcset="">
+                        </div>
+                    </div>
+                    <div class="swiper-slide" style="${product['image-6'] || 'display:none;'}">
+                        <div class="swiper-zoom-container">
+                            <img src="${product['image-6'] || ''}" alt="Image 6" srcset="">
+                        </div>
+                    </div>
+                    <div class="swiper-slide" style="${product['image-7'] || 'display:none;'}">
+                        <div class="swiper-zoom-container">
+                            <img src="${product['image-7'] || ''}" alt="Image 7" srcset="">
                         </div>
                     </div>
                 </div>
@@ -102,8 +117,18 @@ document.addEventListener("DOMContentLoaded", function() {
                 <div class="discount">${product.discount || 'No discount available'}</div>
             </div>
 
-            <!-- Share Button -->
-            <button id="shareButton"><i class="fa-solid fa-share-nodes"></i> Share</button>
+            <div class="product-buttons">
+
+                <div class="share-save">
+                    <!-- Share Button -->
+                    <button id="shareButton"><i class="fa-solid fa-share-nodes"></i> Share</button>
+                    <!-- Share Button -->
+                    <button id="save"><i class="fa-solid fa-bookmark"></i> Save</button>
+                </div>
+                <!-- Add to Cart -->
+                <button id="cart"><i class="fa-solid fa-cart-shopping"></i> Add To Cart</button>
+            
+            </div>
 
             <!-- Product Detailed Table -->
             <h3>Product Details</h3>
