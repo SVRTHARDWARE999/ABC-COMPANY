@@ -126,7 +126,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     <button id="save"><i class="fa-solid fa-bookmark"></i> Save</button>
                 </div>
                 <!-- Add to Cart -->
-                <button id="cart"><i class="fa-solid fa-cart-shopping"></i> Add To Cart</button>
+                <div id="cart-value" style="display:none;">${product.code},</div>
+                <button id="cart" onclick="cart()"><i class="fa-solid fa-cart-shopping"></i> Add To Cart</button>
             
             </div>
 
@@ -152,7 +153,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // Initialize Swiper
         var swiper = new Swiper(".mySwiper", {
             zoom: {
-                maxRatio: 5,
+                maxRatio: 2,
             },
             spaceBetween: 30,
             loop: false,
@@ -171,13 +172,12 @@ document.addEventListener("DOMContentLoaded", function() {
         // Share API
         const shareButton = document.getElementById('shareButton');
         shareButton.addEventListener('click', async () => {
-            const thumbnailImage = document.getElementById('thumblain');
+            const thumbnailImage = document.querySelector('.swiper-slide-active img');
             const pageUrl = window.location.href;
+            const descriptionContent = localStorage.getItem('shareText') || 'No description available';
 
             if (thumbnailImage) {
                 const imageUrl = thumbnailImage.src;
-                const descriptionContent = localStorage.getItem('shareText') || 'No description available';
-
                 if (navigator.share) {
                     try {
                         const response = await fetch(imageUrl);
@@ -234,9 +234,17 @@ document.addEventListener("DOMContentLoaded", function() {
                     console.error('Web Share API is not supported in this browser.');
                 }
             } else {
-                console.error('Thumbnail image not found.');
+                console.error('Active thumbnail image not found.');
             }
         });
+
+        const cartButton = document.getElementById("cart");
+        if (cartButton) {
+            cartButton.addEventListener("click", cart);
+            updateCartButtonState();
+        } else {
+            console.error("Cart button not found after displayProducts");
+        }
 
         // Clear localStorage when the page is closed
         window.addEventListener('beforeunload', () => {
@@ -244,5 +252,55 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+    function updateCartButtonState() {
+        const cartButton = document.getElementById("cart");
+        if (!cartButton) return;
+
+        const cartValueDiv = document.getElementById("cart-value");
+        const allValues = JSON.parse(localStorage.getItem("CartValues")) || [];
+
+        if (cartValueDiv) {
+            const currentCartText = cartValueDiv.textContent || cartValueDiv.innerText;
+
+            if (allValues.includes(currentCartText)) {
+                cartButton.disabled = true;
+                cartButton.innerHTML = '<i class="fa-solid fa-circle-check"></i> Added to Cart';
+                // cartButton.style.color = "black";
+                cartButton.classList.add('cart-active');
+                cartButton.removeAttribute('id')
+            } else {
+                cartButton.disabled = false;
+                cartButton.innerHTML = '<i class="fa-solid fa-cart-shopping"></i> Add to Cart';
+                cartButton.classList.remove('cart-active');
+            }
+        }
+    }
+
+    function cart() {
+        const cartButton = document.getElementById("cart");
+        if (!cartButton) return;
+
+        const cartValueDiv = document.getElementById("cart-value");
+
+        if (cartValueDiv) {
+            const cartText = cartValueDiv.textContent || cartValueDiv.innerText;
+            const existingValues = JSON.parse(localStorage.getItem("CartValues")) || [];
+
+            if (!existingValues.includes(cartText)) {
+                existingValues.push(cartText);
+                localStorage.setItem("CartValues", JSON.stringify(existingValues));
+                console.log("Cart value added to localStorage:", cartText);
+                updateCartButtonState();
+            } else {
+                console.log("Cart value already exists in localStorage:", cartText);
+                // alert("This item is already in the cart.");
+            }
+            updateCartButtonState(); // Immediately update the cart button state
+        } else {
+            console.error("Cart Value div not found");
+        }
+    }
+
     products();
+    updateCartButtonState(); // Call the function when the page is loaded
 });

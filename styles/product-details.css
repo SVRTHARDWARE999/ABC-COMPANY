@@ -25,7 +25,7 @@
 /* Share Button */
 
 #shareButton{
-    width: 64.5%;
+    width: 62.5%;
     height: auto;
     padding: 3%;
     font-size: 5vw;
@@ -48,7 +48,7 @@
 /* Save Button */
 
 #save{
-    width: 24%;
+    width: 25%;
     height: auto;
     position: relative;
     padding: 2.5%;
@@ -85,6 +85,23 @@
     background-color: var(--active-button-color);
     color: white;
     
+}
+
+/* Cart Sucessfull Button */
+
+.cart-active{
+    width: 93%;
+    height: auto;
+    position: relative;
+    padding: 3%;
+    background-color: rgb(112, 155, 112);
+    font-size: 5vw;
+    font-family: system-ui,Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    color: white;
+    border: 1px solid rgb(1, 99, 1);
+    border-radius: 2vw;
+    outline: none;
 }
 
 /* End Page Image Style */
