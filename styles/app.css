@@ -5,10 +5,6 @@
 .home-button i{
     color: var(--active-button-color);
 }
-.spacer{
-    width: 100%;
-    height: 8vh;
-}
 
 /**** Api Loader Animation Image **********/
 
