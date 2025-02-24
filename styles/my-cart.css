@@ -184,17 +184,30 @@
 
 /* Grand Total & Checkout Container */
 
-.grand-total{
+.place-order{
     width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.grand-total{
+    width: 97%;
+    border-radius: 1.5vw;
+    border: 1.5px solid var(--active-button-color);
+    overflow: hidden;
     height: 8vh;
+    margin: 3% 0 3% 0;
     font-family: system-ui,Arial, Helvetica, sans-serif;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    align-self: center;
     background-color: white;
-    position: fixed;
-    bottom: 7.6%;
+    
+   
 }
 .grand-total div{
     width: 80%;
@@ -203,10 +216,13 @@
     position: relative;
     align-items: center;
     justify-content: center;
-    font-size: 5vw;
+    font-size: 7vw;
+    font-weight: bold;
+    color: var(--active-button-color);
+    max-lines: 1;
 }
 .grand-total div:last-child{
-    width: 15%;
+    width: 20%;
     height: 8vh;
     display: flex;
     align-items: center;

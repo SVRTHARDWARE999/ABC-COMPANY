@@ -1,57 +1,53 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const relatedProductsContainer = document.getElementById('related-products');
+    const cartItemsContainer = document.querySelector('.cart-items');
     let start = 0;
     const limit = 16;
     let isLoading = false;
     let allDataLoaded = false;
     let loadedProducts = new Set();
+    const grandTotalElement = document.getElementById('grand-total');
 
     async function fetchProducts() {
-        if (!relatedProductsContainer) {
-            console.error("Related products container not found!");
+        if (!cartItemsContainer) {
+            console.error("Cart items container not found!");
             return;
         }
 
         if (isLoading || allDataLoaded) return;
         isLoading = true;
 
-        // Add loading indicator
         const apiLoader = document.createElement('div');
         apiLoader.className = 'api-loader';
         apiLoader.innerHTML = '<img src="sources/loading-fun-3.gif" alt="Loading..."/>';
-        relatedProductsContainer.appendChild(apiLoader);
+        cartItemsContainer.appendChild(apiLoader);
 
-        // Retrieve CartValues from localStorage
         let cartValues = localStorage.getItem("CartValues");
 
         if (cartValues) {
             try {
-                cartValues = JSON.parse(cartValues)
-                    .map(item => item.replace(',', ''))  // Remove extra commas
-                    .join(',');  // Convert array to "1,2,3"
+                cartValues = JSON.parse(cartValues).map(item => item.trim()).join(',');
             } catch (err) {
                 console.error("Error parsing CartValues from localStorage:", err);
                 cartValues = "";
             }
         } else {
             console.error("CartValues not found in localStorage.");
-            relatedProductsContainer.innerHTML = '<div class="error">Products not found</div>';
+            cartItemsContainer.innerHTML = '<div class="error">Products not found</div>';
             return;
         }
 
         try {
-            const response = await fetch(`https://script.google.com/macros/s/AKfycbwqh0Hs5sOdeoFz25Kny3Zcpw9F-hJCLEJEjp7tVgj5Dl5hrqTWyzHyUByJrO5ADsXddQ/exec?cart=${cartValues}&start=${start}`);
-            
+            const response = await fetch(`https://script.google.com/macros/s/AKfycbx8IKtLPW1Ts2ypBqVEtoM6-UVGA91PwGbnQ0r3yNAwh8zRkrjgba_7gx7derDgcJUAJw/exec?list=${cartValues}&start=${start}`);
+
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
 
             const data = await response.json();
-            console.log("API Response Data:", data); // Log API response for testing
+            console.log("API Response Data:", data);
 
             if (!data || !data.data || !data.data.length) {
                 allDataLoaded = true;
-                updateDynamicProductsMargin();
                 return;
             }
 
@@ -59,93 +55,170 @@ document.addEventListener("DOMContentLoaded", function () {
             start += limit;
         } catch (err) {
             console.error("Failed to fetch API data:", err);
-            relatedProductsContainer.innerHTML = `<div class="error">Error loading products: ${err.message}</div>`;
+            cartItemsContainer.innerHTML = `<div class="error">Error loading products: ${err.message}</div>`;
         } finally {
             isLoading = false;
-            // Remove loading indicator
             if (apiLoader.parentNode) {
                 apiLoader.parentNode.removeChild(apiLoader);
             }
-            // Remove overflow hidden from body
-            document.body.style.overflow = '';
         }
-    }
-
-    function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
     }
 
     function displayProducts(data) {
-        if (!data || !relatedProductsContainer) {
+        if (!data || !cartItemsContainer) {
             console.error("Product data or container is missing.");
             return;
         }
 
-        // Filter and shuffle products
-        const filteredProducts = shuffleArray(data.data.filter(product => {
+        const filteredProducts = data.data.filter(product => {
             if (loadedProducts.has(product.code)) return false;
             loadedProducts.add(product.code);
             return true;
-        }));
+        });
 
-        if (filteredProducts.length === 0) {
-            if (!relatedProductsContainer.querySelector('.dynamic-products')) {
-                relatedProductsContainer.style.display = 'none';
-            }
+        if (filteredProducts.length === 0) return;
+
+        const productsHTML = filteredProducts.map(product => {
+            const moq = parseInt(product.moq);
+            const savedQuantity = localStorage.getItem(`selectedQuantity-${product.code}`) || moq;
+
+            return `
+                <div class="items" data-code="${product.code}">
+                    <div class="image" onclick="window.location.href='product-details.html?code=${product.code}&category=${product.category}&brand=${product.brand}'">
+                        <img src="${product['image-1']}" alt="" />
+                    </div>
+                    <div class="details">
+                        <div class="description">${product.description}</div>
+                        <div class="product-name">
+                            <span>name : &nbsp;</span>
+                            <span>ABC-${product.code}</span>
+                        </div>
+                        <div class="product-brand">
+                            <span>brand : &nbsp;</span>
+                            <span>${product.brand}</span>
+                        </div>
+                        <div class="pricing">
+                            <span>
+                                <select class="quantity-select" data-code="${product.code}">
+                                    <option value="${moq}" ${savedQuantity == moq ? 'selected' : ''}>${moq}</option>
+                                    <option value="${moq * 2}" ${savedQuantity == moq * 2 ? 'selected' : ''}>${moq * 2}</option>
+                                    <option value="${moq * 3}" ${savedQuantity == moq * 3 ? 'selected' : ''}>${moq * 3}</option>
+                                </select>
+                            </span>
+                            <span> X </span>
+                            <span>${product.wholesale}</span>
+                        </div>
+                        <div class="sub-total">
+                            <span>Total : </span><span class="sub-total-value">₹0</span> </div>
+                        <div class="delete" id="delect">
+                            <button class="delete-item">
+                                <i class="fa-solid fa-trash"></i>&nbsp; remove from cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        cartItemsContainer.insertAdjacentHTML('beforeend', productsHTML);
+        attachEventListeners();
+        restoreQuantities();
+    }
+
+    function attachEventListeners() {
+        document.querySelectorAll(".quantity-select").forEach(select => {
+            select.addEventListener("change", function () {
+                const productCode = this.getAttribute("data-code");
+                localStorage.setItem(`selectedQuantity-${productCode}`, this.value);
+                calculateAndUpdateSubTotal(this);
+            });
+        });
+
+        document.querySelectorAll(".delete-item").forEach(button => {
+            button.addEventListener("click", function () {
+                const itemElement = this.closest(".items");
+                const productCode = itemElement.getAttribute("data-code");
+
+                localStorage.removeItem(`selectedQuantity-${productCode}`);
+                let cartValues = JSON.parse(localStorage.getItem("CartValues")) || [];
+                cartValues = cartValues.filter(item => item !== productCode);
+                localStorage.setItem("CartValues", JSON.stringify(cartValues));
+
+                itemElement.remove();
+                updateGrandTotal(); // Update grand total after item removal
+            });
+        });
+    }
+
+    function calculateAndUpdateSubTotal(selectElement) {
+        const itemElement = selectElement.closest(".items");
+        const wholesalePriceElement = itemElement.querySelector(".pricing span:last-of-type");
+        const subTotalValueElement = itemElement.querySelector(".sub-total-value");
+        const quantity = parseInt(selectElement.value);
+
+        if (!wholesalePriceElement || !subTotalValueElement) {
+            console.error("Wholesale price or subtotal element not found.");
             return;
         }
 
-        const productsHTML = filteredProducts.map(product => `
-            <button class="product" onclick="window.location.href='product-details.html?code=${product.code}'">
-                <img src="${product['image-1']}" alt="" loading="lazy">
-                <p class="product-description">${product.description}</p>
-                <p class="product-price"><a><span>${product.wholesale}</span><span>MRP ${product.mrp}</span></a><a>${product.discount}</a></p>
-            </button>
-        `).join('');
+        const wholesalePriceStr = wholesalePriceElement.textContent.trim().replace(/[₹,]/g, '');
+        const wholesalePrice = parseFloat(wholesalePriceStr);
 
-        if (!relatedProductsContainer.querySelector('.dynamic-products')) {
-            relatedProductsContainer.innerHTML = `
-                <h2>Related Products</h2>
-                <div class="dynamic-products">
-                    ${productsHTML}
-                </div>
-            `;
+        if (isNaN(wholesalePrice)) {
+            console.error("Invalid wholesale price format:", wholesalePriceStr);
+            subTotalValueElement.textContent = "₹0";
+            return;
+        }
+
+        const subTotal = quantity * wholesalePrice;
+        subTotalValueElement.textContent = `₹${subTotal.toLocaleString('en-IN')}`;
+        updateGrandTotal();
+    }
+
+    function restoreQuantities() {
+        document.querySelectorAll(".quantity-select").forEach(select => {
+            const productCode = select.getAttribute("data-code");
+            const savedQuantity = localStorage.getItem(`selectedQuantity-${productCode}`);
+            if (savedQuantity) {
+                select.value = savedQuantity;
+            }
+            calculateAndUpdateSubTotal(select);
+        });
+    }
+
+    function updateGrandTotal() {
+        let grandTotal = 0;
+        const subTotalElements = document.querySelectorAll('.sub-total-value');
+
+        subTotalElements.forEach(subTotalElement => {
+            const subTotalStr = subTotalElement.textContent.trim().replace(/[₹,]/g, '');
+            const subTotal = parseFloat(subTotalStr);
+
+            if (!isNaN(subTotal)) {
+                grandTotal += subTotal;
+            } else {
+                console.error("Invalid subtotal format:", subTotalStr);
+            }
+        });
+
+        if (grandTotalElement) {
+            grandTotalElement.textContent = `₹${grandTotal.toLocaleString('en-IN')}`;
         } else {
-            relatedProductsContainer.querySelector('.dynamic-products').insertAdjacentHTML('beforeend', productsHTML);
-        }
-
-        if (allDataLoaded) {
-            updateDynamicProductsMargin();
+            console.error("Grand total element not found!");
         }
     }
 
-    function updateDynamicProductsMargin() {
-        const dynamicProducts = document.querySelector('.dynamic-products');
-        if (dynamicProducts) {
-            const products = dynamicProducts.querySelectorAll('.product');
-            
-            if (products.length % 2 !== 0) {
-                products[products.length - 1].style.display = 'none';
-            }
-            
-            if (allDataLoaded && !dynamicProducts.querySelector('.page-end')) {
-                const endImage = `<img src="sources/end.jpg" alt="end of the page" class="page-end">`;
-                dynamicProducts.insertAdjacentHTML('beforeend', endImage);
-                dynamicProducts.style.margin = '0';
-            }
-        }
-    }
-    
+    let scrollTimeout;
     function handleScroll() {
-        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 100) {
-            fetchProducts();
-        }
+        if (scrollTimeout) clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 100) {
+                fetchProducts().then(restoreQuantities).then(updateGrandTotal);
+            }
+        }, 200);
     }
-    
+
     window.addEventListener('scroll', handleScroll);
-    fetchProducts();
+    
+    fetchProducts().then(restoreQuantities).then(updateGrandTotal);
 });

@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         try {
             document.body.style.overflow = 'hidden'; // Add overflow hidden to body
-            const response = await fetch(`https://script.google.com/macros/s/AKfycbwqh0Hs5sOdeoFz25Kny3Zcpw9F-hJCLEJEjp7tVgj5Dl5hrqTWyzHyUByJrO5ADsXddQ/exec?code=${productId}`); // Replace with actual API URL
+            const response = await fetch(`https://script.google.com/macros/s/AKfycbx8IKtLPW1Ts2ypBqVEtoM6-UVGA91PwGbnQ0r3yNAwh8zRkrjgba_7gx7derDgcJUAJw/exec?code=${productId}`); // Replace with actual API URL
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     <button id="save"><i class="fa-solid fa-bookmark"></i> Save</button>
                 </div>
                 <!-- Add to Cart -->
-                <div id="cart-value" style="display:none;">${product.code},</div>
+                <div id="cart-value" style="display:none;">${product.code}</div>
                 <button id="cart" onclick="cart()"><i class="fa-solid fa-cart-shopping"></i> Add To Cart</button>
             
             </div>
