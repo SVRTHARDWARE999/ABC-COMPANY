@@ -17,8 +17,8 @@ document.addEventListener("DOMContentLoaded", function () {
         isLoading = true;
 
         const apiLoader = document.createElement('div');
-        apiLoader.className = 'api-loader';
-        apiLoader.innerHTML = '<img src="sources/loading-fun-3.gif" alt="Loading..."/>';
+        apiLoader.className = 'cart-loader';
+        apiLoader.innerHTML = '<img src="sources/loading-fun-4.gif" alt="Loading..."/><style>.place-order{display:none;}</style>';
         cartItemsContainer.appendChild(apiLoader);
 
         let cartValues = localStorage.getItem("CartValues");
@@ -31,8 +31,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 cartValues = "";
             }
         } else {
-            console.error("CartValues not found in localStorage.");
-            cartItemsContainer.innerHTML = '<div class="error">Products not found</div>';
+            cartValues = "";
+        }
+
+        if (!cartValues) {
+            cartItemsContainer.innerHTML = '<div class="empty-cart"><img src="sources/empty-cart.jpg"><style>.place-order{display:none;}</style></div>';
             return;
         }
 
@@ -55,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
             start += limit;
         } catch (err) {
             console.error("Failed to fetch API data:", err);
-            cartItemsContainer.innerHTML = `<div class="error">Error loading products: ${err.message}</div>`;
+            cartItemsContainer.innerHTML = `<div class="end">Error loading products: ${err.message}</div>`;
         } finally {
             isLoading = false;
             if (apiLoader.parentNode) {
@@ -146,6 +149,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 itemElement.remove();
                 updateGrandTotal(); // Update grand total after item removal
+
+                // Check if cart is empty after removal
+                if (cartValues.length === 0) {
+                    cartItemsContainer.innerHTML = '<div class="empty-cart"><img src="sources/empty-cart.jpg"><style>.place-order{display:none;}</style></div>';
+                }
             });
         });
     }
