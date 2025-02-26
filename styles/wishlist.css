@@ -1,0 +1,124 @@
+/* .wishlist-master-container{
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    align-self: center;
+    justify-items: center;
+} */
+
+/* wishlist Container */
+.wishlist-container{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Wishlist Product Card */
+
+.products{
+    width: 30.77%;
+    height: 23%;
+    background-color: white;
+    margin: 1%;
+    border: 1.5px solid ;
+    z-index: 3;
+    border-color: var(--active-button-color);
+    border-radius: 1.5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.image img{
+    width: 100%;
+    height: auto;
+    padding: 2% 0 2% 0;
+    image-rendering: auto;
+    -o-object-fit: contain;
+    object-fit: contain;
+    object-position: center;
+}
+
+/* Product Description */
+
+.description{
+    width: 95%;
+    height: auto;
+    position: relative;
+    display: -webkit-box;
+    font-size: 2.5vw;
+    text-align: start;
+    padding: 0 2% 0 2.5%;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-clamp: 2;
+    text-transform: capitalize;
+    font-weight: bold;
+}
+
+/* Product Price */
+
+.price{
+    font-size: 3.5vw;
+    font-weight: bold;
+    color: green;
+    padding: 0 2% 0 3%;
+}
+
+/* Remove Item Button */
+
+.button button{
+    width: 100%;
+    height: auto;
+    background: var(--appbar-color);
+    border: none;
+    border-top: 1px solid;
+    border-color: var(--active-button-color);
+    outline: none;
+    text-transform: capitalize;
+    font-size: 2.8vw;
+    text-align: center;
+    padding: 3%;
+    font-weight: bold;
+    color: var(--active-button-color);
+}
+
+.button button:active{
+    background: var(--active-button-color);
+    color: white;
+}
+
+/* Empty Wish list */
+
+.empty-wishlist{
+    width: 100%;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.empty-wishlist img{
+    width: 70%;
+    height: auto;
+    mix-blend-mode: multiply;
+}
+
+/* Wishlist loading */
+
+.wishlist-loader{
+    width: 100%;
+    height: 25vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.wishlist-loader img{
+    width: 20%;
+    height: auto;
+}

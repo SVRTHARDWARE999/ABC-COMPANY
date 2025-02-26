@@ -66,6 +66,24 @@
     
 }
 
+/* Save Button Active */
+
+.saved{
+    width: 25%;
+    height: auto;
+    position: relative;
+    padding: 2.5%;
+    background-color: red;
+    font-size: 5vw;
+    font-family: system-ui,Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    border: 1px solid red;
+    border-radius: 2vw;
+    outline: none;
+    background: rgb(255, 184, 184);
+    color: black;
+}
+
 /* Add to Cart Button */
 
 #cart{

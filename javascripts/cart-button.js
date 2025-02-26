@@ -17,7 +17,7 @@ function cart() {
     }
   }
   
-  const saveButton = document.getElementById("save-cart-button");
+  const saveButton = document.getElementById("cart");
   if (saveButton) {
     saveButton.addEventListener("click", cart);
   } else {

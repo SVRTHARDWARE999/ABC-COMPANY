@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         try {
             document.body.style.overflow = 'hidden'; // Add overflow hidden to body
-            const response = await fetch(`https://script.google.com/macros/s/AKfycbx8IKtLPW1Ts2ypBqVEtoM6-UVGA91PwGbnQ0r3yNAwh8zRkrjgba_7gx7derDgcJUAJw/exec?code=${productId}`); // Replace with actual API URL
+            const response = await fetch(`https://script.google.com/macros/s/AKfycbwqh0Hs5sOdeoFz25Kny3Zcpw9F-hJCLEJEjp7tVgj5Dl5hrqTWyzHyUByJrO5ADsXddQ/exec?code=${productId}`); // Replace with actual API URL
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 <div class="share-save">
                     <!-- Share Button -->
                     <button id="shareButton"><i class="fa-solid fa-share-nodes"></i> Share</button>
-                    <!-- Share Button -->
+                    <!-- Save Button -->
                     <button id="save"><i class="fa-solid fa-bookmark"></i> Save</button>
                 </div>
                 <!-- Add to Cart -->
@@ -153,7 +153,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // Initialize Swiper
         var swiper = new Swiper(".mySwiper", {
             zoom: {
-                maxRatio: 2,
+                maxRatio: 1.5,
             },
             spaceBetween: 30,
             loop: false,
@@ -172,7 +172,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // Share API
         const shareButton = document.getElementById('shareButton');
         shareButton.addEventListener('click', async () => {
-            const thumbnailImage = document.querySelector('.swiper-slide-active img');
+            const thumbnailImage = document.getElementById('thumblain');
             const pageUrl = window.location.href;
             const descriptionContent = localStorage.getItem('shareText') || 'No description available';
 
@@ -246,6 +246,14 @@ document.addEventListener("DOMContentLoaded", function() {
             console.error("Cart button not found after displayProducts");
         }
 
+        const saveButton = document.getElementById("save");
+        if (saveButton) {
+            saveButton.addEventListener("click", saveToWishList);
+            updateSaveButtonState();
+        } else {
+            console.error("Save button not found after displayProducts");
+        }
+
         // Clear localStorage when the page is closed
         window.addEventListener('beforeunload', () => {
             localStorage.removeItem('shareText');
@@ -265,14 +273,58 @@ document.addEventListener("DOMContentLoaded", function() {
             if (allValues.includes(currentCartText)) {
                 cartButton.disabled = true;
                 cartButton.innerHTML = '<i class="fa-solid fa-circle-check"></i> Added to Cart';
-                // cartButton.style.color = "black";
                 cartButton.classList.add('cart-active');
-                cartButton.removeAttribute('id')
+                cartButton.removeAttribute('id');
             } else {
                 cartButton.disabled = false;
                 cartButton.innerHTML = '<i class="fa-solid fa-cart-shopping"></i> Add to Cart';
                 cartButton.classList.remove('cart-active');
             }
+        }
+    }
+
+    function updateSaveButtonState() {
+        const saveButton = document.getElementById("save");
+        if (!saveButton) return;
+
+        const cartValueDiv = document.getElementById("cart-value");
+        const wishList = JSON.parse(localStorage.getItem("WishList")) || [];
+
+        if (cartValueDiv) {
+            const currentCartText = cartValueDiv.textContent || cartValueDiv.innerText;
+
+            if (wishList.includes(currentCartText)) {
+                saveButton.disabled = true;
+                saveButton.classList.add('saved');
+                saveButton.removeAttribute('id');
+                saveButton.innerHTML = '<i class="fa-solid fa-bookmark"></i> Saved';
+            } else {
+                saveButton.disabled = false;
+                saveButton.classList.remove('saved');
+            }
+        }
+    }
+
+    function saveToWishList() {
+        const saveButton = document.getElementById("save");
+        if (!saveButton) return;
+
+        const cartValueDiv = document.getElementById("cart-value");
+
+        if (cartValueDiv) {
+            const cartText = cartValueDiv.textContent || cartValueDiv.innerText;
+            const wishList = JSON.parse(localStorage.getItem("WishList")) || [];
+
+            if (!wishList.includes(cartText)) {
+                wishList.push(cartText);
+                localStorage.setItem("WishList", JSON.stringify(wishList));
+                console.log("Value added to WishList in localStorage:", cartText);
+                updateSaveButtonState();
+            } else {
+                console.log("Value already exists in WishList in localStorage:", cartText);
+            }
+        } else {
+            console.error("Cart Value div not found");
         }
     }
 
@@ -303,4 +355,5 @@ document.addEventListener("DOMContentLoaded", function() {
 
     products();
     updateCartButtonState(); // Call the function when the page is loaded
+    updateSaveButtonState(); // Call the function when the page is loaded
 });
