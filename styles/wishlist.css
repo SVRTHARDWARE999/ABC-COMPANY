@@ -16,9 +16,8 @@
 }
 
 /* Wishlist Product Card */
-
 .products{
-    width: 30.77%;
+    width: 31%;
     height: 23%;
     background-color: white;
     margin: 0.7%;
@@ -120,6 +119,6 @@
     justify-content: center;
 }
 .wishlist-loader img{
-    width: 20%;
+    width: 50%;
     height: auto;
 }
