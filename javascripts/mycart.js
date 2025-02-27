@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         try {
-            const response = await fetch(`https://script.google.com/macros/s/AKfycbx8IKtLPW1Ts2ypBqVEtoM6-UVGA91PwGbnQ0r3yNAwh8zRkrjgba_7gx7derDgcJUAJw/exec?list=${cartValues}&start=${start}`);
+            const response = await fetch(`https://script.google.com/macros/s/AKfycbz4meZsnUWP2QQHH3yxrMTsD_P8mNHgBmEcHwARW_6RQd7KK65auXFO9jxZ0v426F_iIQ/exec?list=${cartValues}&start=${start}`);
 
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
