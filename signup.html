@@ -8,9 +8,9 @@
     <script src="javascripts/meta-theme.js"></script>
 </head>
 <body>
-    <!-- <div class="login-container">
+    <div class="login-container">
         <h2>Register account</h2>
-        <form id="registrationForm" name="signup">
+        <form id="registrationForm" name="signup" method="post">
             <div class="input-group">
                 <label for="user-mobile">Mobile Number</label>
                 <input type="tel" id="mobile" name="user-mobile" maxlength="10" placeholder="Enter your mobile number" required>
@@ -39,77 +39,33 @@
             <p>Already a user? <a href="login.html">Login now!</a></p>
         </form>
     </div>
-    <div id="errorMessage"></div> -->
-
-    <div class="container">
-        <form method="post" action="" name="contact-form">
-           <h4>Contact Us</h4>
-           <input type="text" name="your-name" placeholder="Name">
-           <input type="text" name="your-number" placeholder="Number">
-           <input type="email" name="your-email" placeholder="Email">
-           <input type="submit" value="Submit" id="submit">
-        </form>
-    </div>
-
+    <div id="errorMessage"></div>
+    
+    
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbynTBvf9CZNUeRCFECDCv3hGPy-09LSJ62i0S4oW-kAXhAkM43gzwaUMENYbqZWxPTXzw/exec'
-
-        const form = document.forms['signup']
-
-        form.addEventListener('submit', e => {
             
-            e.preventDefault()
-            
-            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-            .then(response => alert("Thank you! Form is submitted" ))
-            .then(() => { window.location.reload(); })
-            .catch(error => console.error('Error!', error.message))
-        })
-    </script>
+        document.getElementById("registrationForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        
+            let formData = new FormData(this);
+            let jsonObject = {};
+            formData.forEach((value, key) => { jsonObject[key] = value });
 
-    <!-- <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('registrationForm');
-            const errorMessage = document.getElementById('errorMessage');
-            const submitButton = form.querySelector('button[type="submit"]');
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbynTBvf9CZNUeRCFECDCv3hGPy-09LSJ62i0S4oW-kAXhAkM43gzwaUMENYbqZWxPTXzw/exec';
-    
-            form.addEventListener('submit', async function(e) {
-                e.preventDefault();
-                submitButton.disabled = true;
-                submitButton.textContent = 'Submitting...';
-                
-                try {
-                    // Create form data and log it
-                    const formData = new FormData(form);
-                    console.log('Form data:', Object.fromEntries(formData));
-    
-                    const response = await fetch(scriptURL, {
-                        method: 'POST',
-                        mode: 'no-cors',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                        },
-                        body: new URLSearchParams(formData).toString()
-                    });
-    
-                    if (response.type === 'opaque') {
-                        // Success case with no-cors
-                        alert("Form submitted successfully!");
-                        window.location.href = 'login.html';
-                    }
-    
-                } catch (error) {
-                    console.error('Error:', error);
-                    errorMessage.textContent = 'Submission failed! Please try again.';
-                    alert("Error submitting form!");
-                } finally {
-                    submitButton.disabled = false;
-                    submitButton.textContent = 'Register';
-                }
-            });
+            fetch("https://script.google.com/macros/s/AKfycbwwqsLRdvY3Db_9gEprznqtnI4ZS6AosjEf63_HDN2IdxUYHK9A718YyI7cHXANwC7E0A/exec", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(jsonObject)
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert("Registration successful!");
+                console.log("Response:", data);
+            })
+            .catch(error => console.error("Error:", error));
         });
-    </script> -->
+
+
+    </script>
 
     <style>
         body {
