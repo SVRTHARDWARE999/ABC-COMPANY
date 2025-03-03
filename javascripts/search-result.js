@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         try {
-            const response = await fetch(`https://script.google.com/macros/s/AKfycbz4meZsnUWP2QQHH3yxrMTsD_P8mNHgBmEcHwARW_6RQd7KK65auXFO9jxZ0v426F_iIQ/exec?search=${search}&start=${start}`);
+            const response = await fetch(`https://script.google.com/macros/s/AKfycbyE0xN0qMYD07ZXjyG9XOm1MEfwcVDinYMVIMkiV9-3ZkuXFVJ55S_jWgJFj2KKgstYHQ/exec?search=${search}&start=${start}`);
 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -53,7 +53,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
         } catch (err) {
             console.error("Failed to fetch API data:", err);
-            searchResultContainer.innerHTML = `<div class="error">Error loading products: ${err.message}</div>`;
+            searchResultContainer.style.display = 'none';
+            noSearchContainer.style.display = 'flex';
         } finally {
             isLoading = false;
         }
