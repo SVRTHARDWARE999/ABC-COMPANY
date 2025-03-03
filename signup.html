@@ -44,26 +44,28 @@
     
     <script>
             
-                document.getElementById("registrationForm").addEventListener("submit", function (e) {
+                        document.getElementById("registrationForm").addEventListener("submit", function (e) {
             e.preventDefault();
-            
+
             let formData = new FormData(this);
             let jsonObject = {};
             formData.forEach((value, key) => { jsonObject[key] = value });
 
             fetch("https://script.google.com/macros/s/AKfycbzBvqVt5nGIQNsU5GDWZDWB337w37ungPYMunssef_38nZUZDBZNJu5LYJuy3roJB-i1w/exec", {
                 method: "POST",
-                mode: "no-cors", // Add this to bypass CORS issues
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: new URLSearchParams(jsonObject).toString() // Convert JSON to URL-encoded format
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(jsonObject)
             })
-            .then(() => {
+            .then(response => response.json()) // Parse JSON response
+            .then(data => {
+                console.log("Success:", data);
                 alert("Registration successful!");
             })
-            .catch(error => console.error("Error:", error));
+            .catch(error => {
+                console.error("Error:", error);
+                alert("Registration failed!");
             });
-
-
+            });
 
     </script>
 
