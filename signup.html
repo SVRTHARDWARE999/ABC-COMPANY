@@ -10,10 +10,10 @@
 <body>
     <div class="login-container">
         <h2>Register account</h2>
-        <form id="registrationForm" name="signup" method="post">
+        <form id="registerForm" name="signup" method="post">
             <div class="input-group">
                 <label for="user-mobile">Mobile Number</label>
-                <input type="tel" id="mobile" name="user-mobile" maxlength="10" placeholder="Enter your mobile number" required>
+                <input type="tel" id="mobile" name="mobile" maxlength="10" placeholder="Enter your mobile number" required>
             </div>
             <div class="input-group">
                 <label for="email">G mail</label>
@@ -41,31 +41,37 @@
     </div>
     <div id="errorMessage"></div>
     
-    
     <script>
-            
-                        document.getElementById("registrationForm").addEventListener("submit", function (e) {
-            e.preventDefault();
+                document.getElementById("registerForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent default form submission
 
-            let formData = new FormData(this);
-            let jsonObject = {};
-            formData.forEach((value, key) => { jsonObject[key] = value });
+            let formData = new FormData(this); // Get form data
+            let jsonData = {};
 
-            fetch("https://script.google.com/macros/s/AKfycbzBvqVt5nGIQNsU5GDWZDWB337w37ungPYMunssef_38nZUZDBZNJu5LYJuy3roJB-i1w/exec", {
+            formData.forEach((value, key) => {
+                jsonData[key] = value;
+            });
+
+            // Replace with your actual Google Apps Script Web App URL
+            let scriptURL = "https://script.google.com/macros/s/AKfycbxIYj1JiSMULoQB6iwdMj5VaL6ZUrJSBWbsTn9fA-pFh5NF-1dY-IOhA4rDLDqRtyNvHQ/exec";
+
+            fetch(scriptURL, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(jsonObject)
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: new URLSearchParams(jsonData)
             })
-            .then(response => response.json()) // Parse JSON response
+            .then(response => response.text()) // Get response as text
             .then(data => {
-                console.log("Success:", data);
-                alert("Registration successful!");
+                alert("Registration Successful: " + data);
+                document.getElementById("registerForm").reset();
             })
             .catch(error => {
                 console.error("Error:", error);
-                alert("Registration failed!");
+                document.getElementById("errorMessage").innerText = "Failed to register. Please try again!";
             });
-            });
+        });
 
     </script>
 

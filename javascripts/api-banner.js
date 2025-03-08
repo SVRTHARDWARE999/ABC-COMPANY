@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
     loadingBanner.className = 'banner-loader';
     loadingBanner.innerHTML = '<img src="sources/banner-loading.gif" alt="Loading..." />';
 
-    const API_BASE = "https://script.google.com/macros/s/AKfycbz4meZsnUWP2QQHH3yxrMTsD_P8mNHgBmEcHwARW_6RQd7KK65auXFO9jxZ0v426F_iIQ/exec";
+    const API_BASE = "https://script.google.com/macros/s/AKfycbzTRrOGgdCcqlBZnTfGfqO66kQcW8jhu9D3M9zRr90wDw0RJ-L418LtvxewitB1guAlVw/exec";
     let start = 0;
     const limit = 16;
     let isLoading = false;
