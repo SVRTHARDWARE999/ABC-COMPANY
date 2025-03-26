@@ -120,16 +120,16 @@ document.addEventListener("DOMContentLoaded", function() {
             const products = dynamicProducts.querySelectorAll('.product');
             
             // If odd number of products, hide last one
-            if (products.length % 2 !== 0) {
-                products[products.length - 1].style.display = 'none';
-            }
+                // if (products.length % 2 !== 0) {
+                //     products[products.length - 1].style.display = 'none';
+                // }
             
             // Add end image if not already present
-            if (allDataLoaded && !dynamicProducts.querySelector('.page-end')) {
-                const endImage = `<img src="sources/end.jpg" alt="end of the page" class="page-end">`;
-                dynamicProducts.insertAdjacentHTML('beforeend', endImage);
-                dynamicProducts.style.margin = '0';
-            }
+                if (allDataLoaded && !dynamicProducts.querySelector('.page-end')) {
+                    const endImage = ``;
+                    dynamicProducts.insertAdjacentHTML('beforeend', endImage);
+                    dynamicProducts.style.margin = '0';
+                }
         }
     }
     
