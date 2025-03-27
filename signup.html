@@ -13,7 +13,7 @@
         <form id="registerForm" name="signup" method="post">
             <div class="input-group">
                 <label for="user-mobile">Mobile Number</label>
-                <input type="tel" id="mobile" name="mobile" maxlength="10" placeholder="Enter your mobile number" required>
+                <input type="tel" id="mobile" name="user-mobile" maxlength="10" placeholder="Enter your mobile number" required>
             </div>
             <div class="input-group">
                 <label for="email">G mail</label>
@@ -42,35 +42,37 @@
     <div id="errorMessage"></div>
     
     <script>
-                document.getElementById("registerForm").addEventListener("submit", function (event) {
+            document.getElementById("registerForm").addEventListener("submit", async function(event) {
             event.preventDefault(); // Prevent default form submission
 
-            let formData = new FormData(this); // Get form data
-            let jsonData = {};
+            const formData = {
+                mobile: document.getElementById("mobile").value,
+                email: document.getElementById("email").value,
+                business: document.getElementById("business").value,
+                gstin: document.getElementById("gstin").value,
+                address: document.getElementById("address").value,
+                password: document.getElementById("password").value
+            };
 
-            formData.forEach((value, key) => {
-                jsonData[key] = value;
-            });
+            const apiUrl = "https://script.google.com/macros/s/AKfycbz0jY8Di9h_uqcqv8Dm8pK9qSsgkHxMewSWVueZjI4_-HzxmHYIGNJJNtBjFXZmqDHh_g/exec"; // Replace with your actual Google Apps Script URL
 
-            // Replace with your actual Google Apps Script Web App URL
-            let scriptURL = "https://script.google.com/macros/s/AKfycbxIYj1JiSMULoQB6iwdMj5VaL6ZUrJSBWbsTn9fA-pFh5NF-1dY-IOhA4rDLDqRtyNvHQ/exec";
+            try {
+                const response = await fetch(apiUrl, {
+                    method: "POST", 
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(formData)
+                });
 
-            fetch(scriptURL, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
-                },
-                body: new URLSearchParams(jsonData)
-            })
-            .then(response => response.text()) // Get response as text
-            .then(data => {
-                alert("Registration Successful: " + data);
-                document.getElementById("registerForm").reset();
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                document.getElementById("errorMessage").innerText = "Failed to register. Please try again!";
-            });
+                const result = await response.json();
+                if (result.status === "success") {
+                    alert("Registration successful!");
+                } else {
+                    alert("Error: " + result.message);
+                }
+            } catch (error) {
+                console.error("Fetch error:", error);
+                alert("Failed to register. Please try again.");
+            }
         });
 
     </script>
