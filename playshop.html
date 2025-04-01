@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" user-scalable="no">
+    <title>Play SHOP</title>
+    <link rel="stylesheet" href="styles/body.css">
+</head>
+<body>
+
+    <div class="play-container">
+        <div class="player">
+            <iframe src="https://www.youtube.com/embed/0uDJNZL2TZk?si=AyrLC1WNbFr_YTpr"  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <div class="product-details">
+            <span class="product-image"><img src="https://img.freepik.com/premium-photo/plant-with-flowers-isolated-blank-background-cutout_145713-31249.jpg?w=740" alt=""></span>
+            <span class="product-detailing">
+                <div class="description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores facere eveniet dolorum labore perspiciatis. Animi culpa blanditiis iusto saepe cupiditate doloremque fugiat expedita accusamus nam corrupti, obcaecati, officia voluptas aliquid.</div>
+                <span class="price-container">
+                    <span class="pricing">
+                        <span class="price">₹1999</span>
+                        <br>
+                        <span class="mrp">MRP ₹2899</span>
+                    </span>
+                    <span class="discount">-35% off</span>
+                </span>
+            </span>
+        </div>
+    </div>
+
+    <div class="play-container">
+        <div class="player">
+            <iframe src="https://www.youtube.com/embed/0uDJNZL2TZk?si=AyrLC1WNbFr_YTpr&rel=0&controls=0&modestbranding=0"  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <div class="product-details">
+            <span class="product-image"><img src="https://img.freepik.com/premium-photo/plant-with-flowers-isolated-blank-background-cutout_145713-31249.jpg?w=740" alt=""></span>
+            <span class="product-detailing">
+                <div class="description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores facere eveniet dolorum labore perspiciatis. Animi culpa blanditiis iusto saepe cupiditate doloremque fugiat expedita accusamus nam corrupti, obcaecati, officia voluptas aliquid.</div>
+                <span class="price-container">
+                    <span class="pricing">
+                        <span class="price">₹1999</span>
+                        <br>
+                        <span class="mrp">MRP ₹2899</span>
+                    </span>
+                    <span class="discount">-35% off</span>
+                </span>
+            </span>
+        </div>
+    </div>
+
+    <div class="play-container">
+        <div class="player">
+            <iframe src="https://youtu.be/eDR4AmyONeo?si=leSy_yLpUcJjEk1F"  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <div class="product-details">
+            <span class="product-image"><img src="https://img.freepik.com/premium-photo/plant-with-flowers-isolated-blank-background-cutout_145713-31249.jpg?w=740" alt=""></span>
+            <span class="product-detailing">
+                <div class="description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores facere eveniet </div>
+                <span class="price-container">
+                    <span class="pricing">
+                        <span class="price">₹1999</span>
+                        <br>
+                        <span class="mrp">MRP ₹2899</span>
+                    </span>
+                    <span class="discount">-35% off</span>
+                </span>
+            </span>
+        </div>
+    </div>
+
+    <div class="play-container">
+        <div class="player">
+            <iframe src="https://www.youtube.com/embed/0uDJNZL2TZk?si=AyrLC1WNbFr_YTpr"  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <div class="product-details">
+            <span class="product-image"><img src="https://img.freepik.com/premium-photo/plant-with-flowers-isolated-blank-background-cutout_145713-31249.jpg?w=740" alt=""></span>
+            <span class="product-detailing">
+                <div class="description">Lorem ipsum, dolor sit amet consectetur</div>
+                <span class="price-container">
+                    <span class="pricing">
+                        <span class="price">₹1999</span>
+                        <br>
+                        <span class="mrp">MRP ₹2899</span>
+                    </span>
+                    <span class="discount">-35% off</span>
+                </span>
+            </span>
+        </div>
+    </div>
+
+    <script>
+                document.addEventListener("DOMContentLoaded", function () {
+            let iframes = document.querySelectorAll(".player iframe");
+            let currentPlaying = null;
+
+            function isElementInViewport(el) {
+                let rect = el.getBoundingClientRect();
+                let middle = rect.top + rect.height / 2;
+                return middle >= 0 && middle <= window.innerHeight;
+            }
+
+            function checkVideos() {
+                let closest = null;
+                let minDiff = Infinity;
+
+                if (window.scrollY < 100) { // If near the top, force the first video
+                    closest = iframes[0];
+                } else {
+                    iframes.forEach((iframe, index) => {
+                        let rect = iframe.getBoundingClientRect();
+                        let middle = rect.top + rect.height / 2;
+                        let diff = Math.abs(middle - window.innerHeight / 2);
+                        
+                        if (diff < minDiff) {
+                            minDiff = diff;
+                            closest = iframe;
+                        }
+                    });
+                }
+
+                if (closest && closest !== currentPlaying) {
+                    if (currentPlaying) {
+                        let src = currentPlaying.getAttribute("src").replace("&autoplay=1", "");
+                        currentPlaying.setAttribute("src", src);
+                    }
+
+                    let src = closest.getAttribute("src");
+                    if (!src.includes("autoplay=1")) {
+                        closest.setAttribute("src", src + "&autoplay=1");
+                    }
+                    currentPlaying = closest;
+                }
+            }
+
+            window.addEventListener("scroll", checkVideos);
+            window.addEventListener("resize", checkVideos);
+
+            setTimeout(() => {
+                let firstIframe = iframes[0];
+                if (firstIframe) {
+                    let src = firstIframe.getAttribute("src");
+                    if (!src.includes("autoplay=1")) {
+                        firstIframe.setAttribute("src", src + "&autoplay=1");
+                    }
+                    currentPlaying = firstIframe;
+                }
+            }, 500); // Ensure the first video plays on load
+        });
+
+    </script>
+
+    <script>
+                document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll("iframe").forEach(iframe => {
+                let src = iframe.getAttribute("src");
+                if (src && src.includes("youtu.be")) {
+                    let newSrc = src.replace(
+                        /https?:\/\/youtu.be\/([a-zA-Z0-9_-]+)(\?.*)?/,
+                        "https://www.youtube.com/embed/$1$2"
+                    );
+                    iframe.setAttribute("src", newSrc);
+                }
+            });
+        });
+
+    </script>
+    
+</body>
+</html>
+
+<style>
+    body{
+        width: 100%;
+        height: auto;
+        margin: 0;
+        color: black;
+        background-color: rgb(210, 210, 210);
+    }
+    .play-container{
+        width: 100%;
+        height: auto;
+        margin: 3% 0%;
+        background-color: white;
+    }
+    .player iframe{
+        aspect-ratio: 16/9;
+        width: 100%;
+        background-color: rgb(255, 155, 155);
+        border: none;
+    }
+    .product-details{
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        overflow: hidden;
+    }
+
+    .product-image{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: auto;
+        background-color: white;
+    }
+    .product-image img{
+        width: 31vw;
+        height: auto;
+        aspect-ratio: 1/1;
+        background-color: white;
+        object-fit: contain;
+        margin: 0;
+    }
+
+    .product-detailing{
+        display: flex;
+        height: auto;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+    
+    .description{
+        position: relative;
+        height: auto;
+        padding: 0% 1%;
+        font-size: 14px;
+        font-weight: bold;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-transform: capitalize;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+    }
+    .price-container{
+        padding: 1% 2%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    .price{
+        font-size: 20px;
+        font-weight: bold;
+        color: green;
+    }
+    .mrp{
+        font-size: 15px;
+        text-decoration: line-through;
+        color: gray;
+    }
+    .discount{
+        font-size: 18px;
+        font-weight: bolder;
+        color: maroon;
+        text-transform: uppercase;
+    }
+
+</style>
