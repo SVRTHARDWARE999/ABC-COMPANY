@@ -2,19 +2,54 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Detailed Project Re[ort</title>
     <link rel="stylesheet" href="/styles/app.css">
+    <link rel="stylesheet" href="/swiperJS/swiper-bundle.min.css">
+    <script src="/javascripts/disable-longpress.js"></script>
+    <script src="/swiperJS/swiper-bundle.min.js"></script>
 </head>
 <body>
 
+    <div class="banners">
+
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                
+                <div class="swiper-slide">
+                    <div class="swiper-container">
+                        <img src="sources/ban-1.jpg" alt="">
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="swiper-container">
+                        <img src="sources/ban-2.jpg" alt="">
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="swiper-container">
+                        <img src="sources/ban-3.jpg" alt="">
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="swiper-container">
+                        <img src="sources/ban-4.jpg" alt="">
+                    </div>
+                </div>
+
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+
+    </div>
+
     <div class="project-report">
         <img src="sources/Cloud Restaurant_1.jpg" alt="page 1">
-    <img src="sources/Cloud Restaurant_2.jpg" alt="page 2">
-    <img src="sources/Cloud Restaurant_3.jpg" alt="page 3">
-    <img src="sources/Cloud Restaurant_4.jpg" alt="page 4">
-    <img src="sources/Cloud Restaurant_5.jpg" alt="page 5">
-    <img src="sources/Cloud Restaurant_6.jpg" alt="page 6">
+        <img src="sources/Cloud Restaurant_2.jpg" alt="page 2">
+        <img src="sources/Cloud Restaurant_3.jpg" alt="page 3">
+        <img src="sources/Cloud Restaurant_4.jpg" alt="page 4">
+        <img src="sources/Cloud Restaurant_5.jpg" alt="page 5">
+        <img src="sources/Cloud Restaurant_6.jpg" alt="page 6">
     </div>
 
     <style>
@@ -23,7 +58,7 @@
             flex-direction: column;
             align-items: center;
         }
-        img{
+        .project-report img {
             width: 97%;
             height: auto;
             display: block;
@@ -32,6 +67,79 @@
             border-radius: 1vw;
         }
     </style>
+
+    <style>
+        .swiper {
+          width: 100%;
+          height: auto;
+          margin: 0;
+        }
+        .swiper-wrapper {
+          width: 100%;
+          
+        }
+        .swiper-slide {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+        }
+        .swiper-container {
+          width: 97%;
+          height: auto;
+          border-radius: 1.5vw;
+          overflow: hidden;
+          background-color: #ffffff;
+          border: 1px solid black;
+        }
+        .swiper-container img{
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+            aspect-ratio: 16/9; /* Maintain 16:9 aspect ratio */
+            object-fit: contain; /* Ensure the image covers the container */
+        }
+        
+        /* Customize the pagination bullets */
+        .swiper-pagination-bullet {
+            width: 5vw; /* Adjust the size */
+            height: 0.5vh; /* Adjust the size */
+            background-color: rgb(112, 219, 255); /* Default color */
+            opacity: 1; /* Ensure full opacity */
+            border-radius: 1vw; /* Make bullets round */
+            margin: 0.5vw; /* Adjust spacing between bullets */
+        }
+
+        /* Customize the active pagination bullet */
+        .swiper-pagination-bullet-active {
+            background-color: rgb(40, 40, 207); /* Active color */
+            width: 5vw; /* Adjust the size */
+            height: 0.5vh; /* Adjust the size */
+        }
+    </style>
+    <!-- Initialize Swiper -->
+    <script>
+        const progressCircle = document.querySelector(".autoplay-progress svg");
+        const progressContent = document.querySelector(".autoplay-progress span");
+        var swiper = new Swiper(".mySwiper", {
+          spaceBetween: 8,
+          loop:false,
+          centeredSlides: true,
+          autoplay: {
+            delay: 2800,
+            disableOnInteraction: false,
+          },
+          pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+          },
+          navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          }
+        });
+    </script>
 
 
     
