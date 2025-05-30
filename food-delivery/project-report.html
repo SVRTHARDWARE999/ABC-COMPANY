@@ -28,7 +28,7 @@
                 </div>
                 <div class="swiper-slide">
                     <div class="swiper-container">
-                        <img src="sources/ban-3.jpg" alt="">
+                        <a href="tel:+917981763120"><img src="sources/ban-3.jpg" alt=""></a>
                     </div>
                 </div>
                 <div class="swiper-slide">
@@ -53,6 +53,10 @@
     </div>
 
     <style>
+        .swiper-container a{
+            -webkit-tap-highlight-color: rgba(255, 255, 255, 0.488);
+            -webkit-touch-callout: none;
+        }
         .project-report {
             display: flex;
             flex-direction: column;
@@ -100,7 +104,9 @@
             aspect-ratio: 16/9; /* Maintain 16:9 aspect ratio */
             object-fit: contain; /* Ensure the image covers the container */
         }
-        
+        .swiper-pagination-clickable{
+            margin-top: 5% !important;
+        }
         /* Customize the pagination bullets */
         .swiper-pagination-bullet {
             width: 5vw; /* Adjust the size */
