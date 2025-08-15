@@ -74,7 +74,7 @@
                     payCashSpan.textContent = amount;
 
                     // UPI QR String
-                    const upiUrl = `upi://pay?pa=9398899473-3@axl&pn=Nerusu%20Venkata%20Ramana&mc=0000&mode=02&purpose=00&am=${amount}.00`;
+                    const upiUrl = `upi://pay?pa=7981763120@axl&pn=Nerusu%20Rama%20Krishna&mc=0000&mode=02&purpose=00&am=${amount}.00`;
 
                     // Clear existing QR code
                     qrCodeContainer.innerHTML = "";
@@ -94,7 +94,7 @@
                         const img = qrCodeContainer.querySelector("img");
                         if (img) {
                             const logo = document.createElement("img");
-                            logo.src = "sources/uber-icon.webp";
+                            logo.src = "sources/uber-icon.jpg";
                             logo.style.position = "absolute";
                             logo.style.top = "50%";
                             logo.style.left = "50%";
